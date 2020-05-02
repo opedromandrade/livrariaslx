@@ -12,4 +12,4 @@ Isto é um trabalho inacabado e em constante actualização. Críticas e sugest�
 ## Créditos
 - O **Livrarias LX** serve-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). Todas as alterações e modificações posteriores a meu cargo;
 - Todas as licenças iniciais foram mantidas;
-- As imagens das legendas foram obtidas na internet. Caso não autorize a sua autorização, não hesite em enviar um [email](mailto:pmm.andrade@outlook.com).
+- As imagens e algumas legendas foram obtidas ou adptadas do que foi encontrado na internet. Caso não autorize a sua autorização, não hesite em enviar um [email](mailto:pmm.andrade@outlook.com).
