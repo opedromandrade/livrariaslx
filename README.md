@@ -1,35 +1,15 @@
-# Leaflet Maps with Google Sheets
-Customize Leaflet maps with a linked Google Sheets template and GeoJSON data on GitHub
+# Livrarias Independentes de Lisboa
+Pretende-se fazer resenha das Livrarias Independentes de Lisboa e Arredores.
+Todos aqueles locais de paixão pelo livro que fogem aos grandes impérios do consumo e aglomeração de massas, e onde existe um genuíno relacionamento entre livreiros e os apreciadores de livros.
 
-![Preview](preview.jpg)
+## Consulta de Informação
+- Mapa Leaflet: https://opedromandrade.github.io/livrariaslx/
+- Google Sheets (em actualização): https://docs.google.com/spreadsheets/d/13YY8uzI5arZxlLez0GJwK55_BmGmFTXt3opiCGsCKm0/edit#gid=164271551
 
-## Live links (replace with your own)
-- Leaflet Map https://opedromandrade.github.io/leaflet-maps-with-google-sheets/
-- Google Sheets template https://docs.google.com/spreadsheets/d/1u5cCSp_380CBHZTyxQAaKgAzOzmsuYDEH06M5WUrhwM/edit#gid=0
+## Sugestões
+Isto é um trabalho sempre inacabado e em constante actualização. Críticas e sugestões são bem-vindas. Não hesite em enviar um [email](mailto:pmm.andrade@outlook.com).
 
-## Create your own
-- See video with step-by-step tutorial in *Data Visualization for All* https://datavizforall.org/leaflet-maps-with-google-sheets.html
-
-## Credits (and licenses)
-Developed by [Ilya Ilyankou](https://github.com/ilyankou) and [Jack Dougherty](https://github.com/jackdougherty) with support from Trinity College CT, using a [Google Sheets](https://www.google.com/sheets/about/) template, with these open-source components:
-- Inspired by: Code for Atlanta mapsfor.us (2016) https://github.com/codeforatlanta/mapsforus (BSD-3-Clause)
-- Leaflet v1.0.3 https://leafletjs.com (BSD-2-Clause)
-- jQuery v3.2.0 https://code.jquery.com (MIT)
-- leaflet-providers (v1.1.15, manually updated for Carto https) https://github.com/leaflet-extras/leaflet-providers (BSD-2-Clause)
-- leaflet-locatecontrol (v0.60.0) https://github.com/domoritz/leaflet-locatecontrol (MIT)
-- Leaflet.markercluster (v1.0.4) https://github.com/Leaflet/Leaflet.markercluster (MIT)
-- Leaflet.MarkerCluster.LayerSupport (v.1.0.3) https://github.com/ghybs/Leaflet.MarkerCluster.LayerSupport (MIT)
-- Font Awesome (v4.7) https://cdn.fontawesome.com (MIT, SIL OFL 1.1)
-- Leaflet.awesome-markers (v2.0.4) https://github.com/sigma-geosistemas/Leaflet.awesome-markers (MIT)
-- Single Element CSS Spinner (31 May 2016) https://github.com/lukehaas/css-loaders (MIT)
-- Tabletop.js gives spreadsheets legs, by returning Google Sheets data in JSON format (v1.5.1) https://github.com/jsoma/tabletop (MIT)
-- Google Colour Palette Generator (2015) https://github.com/google/palette.js (MIT)
-- Google Sheets Geocoder (v1.0) by Ilya Ilyankou and Jack Dougherty https://github.com/jackdougherty/google-sheets-geocoder (no license)
-- polylabel (Dec. 2016 customized) https://github.com/mapbox/polylabel to optimally place text labels in a polygon (ISC), with TinyQueue (v1.1.0) (https://github.com/mourner/tinyqueue), polylabel's dependency (ISC)
-- jQuery-CSV (v0.71) https://github.com/evanplaice/jquery-csv (MIT)
-- DataTables (v1.10.13) by SpryMedia Ltd. https://datatables.net (MIT)
-- [Leaflet Control Geocoder](https://github.com/perliedman/leaflet-control-geocoder) by @perliedman (BSD 2-Clause)
-
-## Please submit any pull requests to our DEV repo
-- Leaflet Map FOR DEVELOPMENT https://jackdougherty.github.io/leaflet-maps-with-google-sheets-dev/index.html
-- Google Sheet FOR DEVELOPMENT https://docs.google.com/spreadsheets/d/1_xjrH3gSImzRKqIkhRAqpAAMjH387yaBWfGbidkKtqM/
+## Créditos
+- O Livrarias LX serve-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). Todas as alterções e modificações poseteriores a meu cargo.
+- Todas as licenças foram mantidas.
+- As imagens das legendas foram obtidas na internet. Caso não autorize a sua autorização, não hesite em enviar um [email](mailto:pmm.andrade@outlook.com)
