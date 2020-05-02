@@ -3,7 +3,7 @@
 Todos aqueles locais de paixão pelo livro que fogem aos grandes impérios do consumo e aglomeração de massas, e onde existe um genuíno relacionamento entre livreiros e os apreciadores de livros.
 
 ## Consulta de Informação
-- Mapa Leaflet: https://opedromandrade.github.io/livrariaslx
+- Mapa: https://opedromandrade.github.io/livrariaslx
 - Google Sheets (em actualização): https://docs.google.com/spreadsheets/d/13YY8uzI5arZxlLez0GJwK55_BmGmFTXt3opiCGsCKm0/edit#gid=164271551
 
 ## Sugestões
