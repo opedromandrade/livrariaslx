@@ -10,6 +10,6 @@ Todos aqueles locais de paixão pelo livro que fogem aos grandes impérios do co
 Isto é um trabalho inacabado e em constante actualização. Críticas e sugestões são bem-vindas. Não hesite em enviar um [email](mailto:pmm.andrade@outlook.com).
 
 ## Créditos
-- O Livrarias LX serve-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). Todas as alterções e modificações posteriores a meu cargo;
+- O **Livrarias LX** serve-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). Todas as alterções e modificações posteriores a meu cargo;
 - Todas as licenças iniciais foram mantidas;
 - As imagens das legendas foram obtidas na internet. Caso não autorize a sua autorização, não hesite em enviar um [email](mailto:pmm.andrade@outlook.com).
