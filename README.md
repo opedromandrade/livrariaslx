@@ -1,4 +1,4 @@
-# Livrarias Independentes de Lisboa
+# :books: Livrarias Independentes de Lisboa 
 **Livrarias LX** pretende fazer resenha das **Livrarias Independentes de Lisboa e Arredores**.
 Todos aqueles locais de paixão pelo livro que fogem aos grandes impérios do consumo e aglomeração de massas, e onde existe um genuíno relacionamento entre livreiros e os apreciadores de livros.
 
