@@ -11,7 +11,7 @@ No início de maio de 2020, querendo partilhar e compilar a informação de um m
 - Google Sheets (em actualização): https://docs.google.com/spreadsheets/d/13YY8uzI5arZxlLez0GJwK55_BmGmFTXt3opiCGsCKm0/edit#gid=164271551
 
 ## Sugestões
-Isto é um trabalho inacabado e em constante actualização. Contributos e sugestões são bem-vindas e podem ser remetidos através de [email](mailto:pmm.andrade@outlook.com).
+Isto é um trabalho inacabado e em constante actualização. Contributos e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade@outlook.com).
 
 ## Créditos
 - O **Livrarias LX** serve-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). Todas as alterações e modificações posteriores a meu cargo;
