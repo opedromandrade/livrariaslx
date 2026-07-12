@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Directory Map</title>
+    
+    <!-- Link directly to your separate local stylesheet file -->
+    <link rel="stylesheet" href="leaflet.css" />
+    
+    <style>
+        html, body, #map {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #e5e5e5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Floating Elegant Panel Layer Overlay over Map Box UI */
+        .map-overlay-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 320px;
+            max-height: calc(100vh - 80px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+		
+        .panel-header {
+			cursor: pointer;
+        }
+        .list-hidden {
+            display: none !important;
+        }
+
+
+        .panel-header {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        /* Scrollable Dynamic Checklist Box Area */
+        .store-list-container {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 8px 0;
+        }
+
+        .store-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .store-item-row:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .store-meta-text {
+            flex-grow: 1;
+            padding-right: 12px;
+        }
+
+        .store-display-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1d1d1f;
+            margin: 0 0 2px 0;
+        }
+
+        .store-display-address {
+            font-size: 11px;
+            color: #86868b;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        /* Minimalist Switch Controls */
+        .toggle-switch-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch-wrapper input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-button {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #d2d2d7;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider-button:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 2px; bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        input:checked + .slider-button {
+            background-color: #34c759;
+        }
+
+        input:checked + .slider-button:before {
+            transform: translateX(16px);
+        }
+
+        .master-toggle-btn {
+            font-size: 12px;
+            color: #0071e3;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-weight: 500;
+        }
+
+        .master-toggle-btn:hover {
+            text-decoration: underline;
+        }
+
+        .emoji-marker {
+            font-size: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Full-window viewport map frame element -->
+    <div id="map"></div>
+
+    <!-- Floating Elegant Interface Overlay Card -->
+    <div class="map-overlay-panel">
+        <div class="panel-header">
+            <div>
+                <h2 class="panel-title">📚 Bookstores</h2>
+                <small style="font-size: 11px; color: #86868b; display: block; margin-top: 2px;">Click to hide / expand</small>
+            </div>
+            <button id="masterToggle" class="master-toggle-btn">Deselect All</button>
+        </div>
+
+        <div class="store-list-container" id="listWrapper"></div>
+    </div>
+
+    <!-- Link directly to your separate local script core logic execution file -->
+    <script src="leaflet.js"></script>
+
+    <script>
+        // Start map engine cleanly with standard string configuration properties
+        var map = L.map('map');
+        map.setView(L.latLng(0, 0), 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var customBookIcon = L.divIcon({
+            html: '📚',
+            className: 'emoji-marker',
+            iconSize: L.point(30, 30),
+            iconAnchor: L.point(15, 15),
+            popupAnchor: L.point(0, -15)
+        });
+
+        var storeDirectory = [];
+        var activeMarkerGroup = L.featureGroup();
+        var allSelectedState = true;
+
+        // Pull data directly from your local tracking columns layout spreadsheets
+        fetch('bookstores.csv')
+            .then(function(res) { return res.text(); })
+            .then(function(csvText) {
+                var lines = csvText.split(/\r\n|\n/);
+                if (lines.length < 2) return;
+
+                var headers = lines[0].split(',').map(function(h) { return h.trim(); });
+                var nameIdx = headers.indexOf('Name');
+                var latIdx = headers.indexOf('Latitude');
+                var lngIdx = headers.indexOf('Longitude');
+                var addrIdx = headers.indexOf('Address');
+
+                var listWrapper = document.getElementById('listWrapper');
+                var dynamicHTML = '';
+                var idCounter = 0;
+
+                for (var i = 1; i < lines.length; i++) {
+                    var currentLine = lines[i].trim();
+                    if (!currentLine) continue;
+
+                    var columns = currentLine.split(',');
+                    var latVal = parseFloat(columns[latIdx]);
+                    var lngVal = parseFloat(columns[lngIdx]);
+                    var nameVal = (columns[nameIdx] || "Bookstore").trim();
+                    var addrVal = (columns[addrIdx] || "Coordinates mapped").trim();
+
+                    if (!isNaN(latVal) && !isNaN(lngVal)) {
+                        var markerLatLng = L.latLng(latVal, lngVal);
+                        var marker = L.marker(markerLatLng, { icon: customBookIcon });
+                        marker.bindPopup('<b>' + nameVal + '</b><br><small style="color:#666">' + addrVal + '</small>');
+                        
+                        storeDirectory.push({
+                            id: idCounter,
+                            name: nameVal,
+                            address: addrVal,
+                            marker: marker,
+                            active: true
+                        });
+
+                        marker.addTo(activeMarkerGroup);
+
+                        // Form the minimalist slider row elements array layout template
+                        dynamicHTML += '<div class="store-item-row" data-id="' + idCounter + '">' +
+                            '<div class="store-meta-text" onclick="focusStoreMarker(' + idCounter + ')">' +
+                                '<p class="store-display-name">' + nameVal + '</p>' +
+                                '<p class="store-display-address">' + addrVal + '</p>' +
+                            '</div>' +
+                            '<label class="toggle-switch-wrapper">' +
+                                '<input type="checkbox" class="toggle-input-switch" data-id="' + idCounter + '" checked />' +
+                                '<span class="slider-button"></span>' +
+                            '</label>' +
+                        '</div>';
+
+                        idCounter++;
+                    }
+                }
+
+                listWrapper.innerHTML = dynamicHTML;
+
+                if (storeDirectory.length > 0) {
+                    activeMarkerGroup.addTo(map);
+                    map.fitBounds(activeMarkerGroup.getBounds().pad(0.3));
+                    attachInteractiveListeners();
+                }
+            });
+
+        // Focus map views frames over target marker entries
+        function focusStoreMarker(id) {
+            var store = storeDirectory.find(function(item) { return item.id === id; });
+            if (store && store.active) {
+                map.setView(store.marker.getLatLng(), 15);
+                store.marker.openPopup();
+            }
+        }
+
+        // Connect user interaction triggers
+        function attachInteractiveListeners() {
+            var switches = document.querySelectorAll('.toggle-input-switch');
+            var masterToggle = document.getElementById('masterToggle');
+
+            switches.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    var targetedId = parseInt(this.getAttribute('data-id'));
+                    var store = storeDirectory.find(function(item) { return item.id === targetedId; });
+                    
+                    if (this.checked) {
+                        store.active = true;
+                        map.addLayer(store.marker);
+                    } else {
+                        store.active = false;
+						map.removeLayer(store.marker);
+						}reframeActiveBoundaries();
+						});});
+					
+					masterToggle.addEventListener('click', function() {
+					allSelectedState = !allSelectedState;
+					this.textContent = allSelectedState ? "Deselect All" : "Select All";
+					switches.forEach(function(checkbox) {
+					checkbox.checked = allSelectedState;
+					});
+					
+					storeDirectory.forEach(function(store) {
+					store.active = allSelectedState;
+					if (allSelectedState) {
+					map.addLayer(store.marker);
+					} else {
+					map.removeLayer(store.marker);
+					}
+					});
+					reframeActiveBoundaries();
+					});
+					}
+					
+				// Dynamic automated map frame adjustments
+				function reframeActiveBoundaries() {
+				var renderingPins = [];
+				storeDirectory.forEach(function(store) {
+				if (store.active) renderingPins.push(store.marker);
+				});
+				
+				if (renderingPins.length > 0) {
+				var updateBounds = L.featureGroup(renderingPins);
+				map.fitBounds(updateBounds.getBounds().pad(0.3));
+				}}
+				
+        // Click the header to hide or show the bookstore list rows
+        document.querySelector('.panel-header').addEventListener('click', function() {
+            document.getElementById('listWrapper').classList.toggle('list-hidden');
+        });
+
+    </script>
+</body>
+</html>
