@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore Directory Map</title>
+    <title>Bookstore Map Directory</title>
     
     <!-- Link directly to your separate local stylesheet file -->
     <link rel="stylesheet" href="leaflet.css" />
@@ -24,7 +24,7 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
-            width: 320px;
+            width: 340px;
             max-height: calc(100vh - 80px);
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
@@ -36,14 +36,6 @@
             flex-direction: column;
             overflow: hidden;
         }
-		
-        .panel-header {
-			cursor: pointer;
-        }
-        .list-hidden {
-            display: none !important;
-        }
-
 
         .panel-header {
             padding: 16px;
@@ -52,6 +44,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
         }
 
         .panel-title {
@@ -70,11 +63,11 @@
 
         .store-item-row {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            padding: 10px 16px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             transition: background-color 0.2s ease;
-            cursor: pointer;
         }
 
         .store-item-row:hover {
@@ -84,23 +77,86 @@
         .store-meta-text {
             flex-grow: 1;
             padding-right: 12px;
+            cursor: pointer;
         }
 
         .store-display-name {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: #1d1d1f;
-            margin: 0 0 2px 0;
+            margin: 0 0 4px 0;
         }
 
         .store-display-address {
             font-size: 11px;
             color: #86868b;
-            margin: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
+            margin: 0 0 6px 0;
+            line-height: 1.4;
+            white-space: normal;
+            overflow: visible;
+        }
+
+        /* Extended contact details for panel rows */
+        .store-display-contact {
+            font-size: 11px;
+            color: #1d1d1f;
+            margin: 0 0 6px 0;
+            text-decoration: none;
+            display: block;
+        }
+        .store-display-contact:hover {
+            color: #0071e3;
+        }
+
+        .panel-links-row {
+            margin-top: 6px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .panel-inline-link {
+            font-size: 10px;
+            font-weight: 600;
+            color: #0071e3;
+            text-decoration: none;
+            background: rgba(0, 113, 227, 0.08);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .panel-inline-link:hover {
+            background: #0071e3;
+            color: #ffffff;
+        }
+
+        /* Popups button styling */
+        .popup-phone-text {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #1d1d1f;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .popup-phone-text:hover {
+            color: #0071e3;
+        }
+
+        .popup-link-btn {
+            display: inline-block;
+            margin-top: 8px;
+            margin-right: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #0071e3;
+            text-decoration: none;
+            background: rgba(0, 113, 227, 0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .popup-link-btn:hover {
+            background: #0071e3;
+            color: #ffffff;
         }
 
         /* Minimalist Switch Controls */
@@ -110,6 +166,7 @@
             width: 36px;
             height: 20px;
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
         .toggle-switch-wrapper input {
@@ -155,9 +212,12 @@
             padding: 0;
             font-weight: 500;
         }
-
         .master-toggle-btn:hover {
             text-decoration: underline;
+        }
+
+        .list-hidden {
+            display: none !important;
         }
 
         .emoji-marker {
@@ -169,10 +229,8 @@
 </head>
 <body>
 
-    <!-- Full-window viewport map frame element -->
     <div id="map"></div>
 
-    <!-- Floating Elegant Interface Overlay Card -->
     <div class="map-overlay-panel">
         <div class="panel-header">
             <div>
@@ -181,20 +239,17 @@
             </div>
             <button id="masterToggle" class="master-toggle-btn">Deselect All</button>
         </div>
-
         <div class="store-list-container" id="listWrapper"></div>
     </div>
-
-    <!-- Link directly to your separate local script core logic execution file -->
+    <!-- Link directly to your separate local script file -->
     <script src="leaflet.js"></script>
 
     <script>
-        // Start map engine cleanly with standard string configuration properties
         var map = L.map('map');
         map.setView(L.latLng(0, 0), 2);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
+            attribution: '&copy; OpenStreetMap'
         }).addTo(map);
 
         var customBookIcon = L.divIcon({
@@ -209,7 +264,6 @@
         var activeMarkerGroup = L.featureGroup();
         var allSelectedState = true;
 
-        // Pull data directly from your local tracking columns layout spreadsheets
         fetch('bookstores.csv')
             .then(function(res) { return res.text(); })
             .then(function(csvText) {
@@ -221,6 +275,10 @@
                 var latIdx = headers.indexOf('Latitude');
                 var lngIdx = headers.indexOf('Longitude');
                 var addrIdx = headers.indexOf('Address');
+                var phoneIdx = headers.indexOf('Phone');
+                var webIdx = headers.indexOf('Website');
+                var fbIdx = headers.indexOf('Facebook');
+                var igIdx = headers.indexOf('Instagram');
 
                 var listWrapper = document.getElementById('listWrapper');
                 var dynamicHTML = '';
@@ -235,12 +293,28 @@
                     var lngVal = parseFloat(columns[lngIdx]);
                     var nameVal = (columns[nameIdx] || "Bookstore").trim();
                     var addrVal = (columns[addrIdx] || "Coordinates mapped").trim();
+                    var phoneVal = columns[phoneIdx] ? columns[phoneIdx].trim() : "";
+                    var webVal = columns[webIdx] ? columns[webIdx].trim() : "";
+                    var fbVal = columns[fbIdx] ? columns[fbIdx].trim() : "";
+                    var igVal = columns[igIdx] ? columns[igIdx].trim() : "";
 
                     if (!isNaN(latVal) && !isNaN(lngVal)) {
                         var markerLatLng = L.latLng(latVal, lngVal);
                         var marker = L.marker(markerLatLng, { icon: customBookIcon });
-                        marker.bindPopup('<b>' + nameVal + '</b><br><small style="color:#666">' + addrVal + '</small>');
                         
+                        var popupContent = '<b>' + nameVal + '</b><br><small style="color:#666">' + addrVal + '</small>';
+                        if (phoneVal) {
+                            popupContent += '<a class="popup-phone-text" href="tel:' + phoneVal.replace(/\s+/g, '') + '">📞 ' + phoneVal + '</a>';
+                        }
+                        if (webVal || fbVal || igVal) {
+                            popupContent += '<div style="margin-top: 4px;">';
+                            if (webVal) popupContent += '<a class="popup-link-btn" target="_blank" href="' + webVal + '">🌐 Website</a>';
+                            if (fbVal) popupContent += '<a class="popup-link-btn" target="_blank" href="' + fbVal + '">📘 Facebook</a>';
+                            if (igVal) popupContent += '<a class="popup-link-btn" target="_blank" href="' + igVal + '">📸 Instagram</a>';
+                            popupContent += '</div>';
+                        }
+                        marker.bindPopup(popupContent);
+
                         storeDirectory.push({
                             id: idCounter,
                             name: nameVal,
@@ -251,12 +325,24 @@
 
                         marker.addTo(activeMarkerGroup);
 
-                        // Form the minimalist slider row elements array layout template
-                        dynamicHTML += '<div class="store-item-row" data-id="' + idCounter + '">' +
+                        dynamicHTML += '<div class="store-item-row">' +
                             '<div class="store-meta-text" onclick="focusStoreMarker(' + idCounter + ')">' +
                                 '<p class="store-display-name">' + nameVal + '</p>' +
-                                '<p class="store-display-address">' + addrVal + '</p>' +
-                            '</div>' +
+                                '<p class="store-display-address">' + addrVal + '</p>';
+                        
+                        if (phoneVal) {
+                            dynamicHTML += '<a class="store-display-contact" href="tel:' + phoneVal.replace(/\s+/g, '') + '">📞 ' + phoneVal + '</a>';
+                        }
+                        
+                        if (webVal || fbVal || igVal) {
+                            dynamicHTML += '<div class="panel-links-row">';
+                            if (webVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + webVal + '">🌐 Web</a>';
+                            if (fbVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + fbVal + '">📘 FB</a>';
+                            if (igVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + igVal + '">📸 IG</a>';
+                            dynamicHTML += '</div>';
+                        }
+
+                        dynamicHTML += '</div>' +
                             '<label class="toggle-switch-wrapper">' +
                                 '<input type="checkbox" class="toggle-input-switch" data-id="' + idCounter + '" checked />' +
                                 '<span class="slider-button"></span>' +
@@ -276,7 +362,6 @@
                 }
             });
 
-        // Focus map views frames over target marker entries
         function focusStoreMarker(id) {
             var store = storeDirectory.find(function(item) { return item.id === id; });
             if (store && store.active) {
@@ -285,7 +370,6 @@
             }
         }
 
-        // Connect user interaction triggers
         function attachInteractiveListeners() {
             var switches = document.querySelectorAll('.toggle-input-switch');
             var masterToggle = document.getElementById('masterToggle');
@@ -300,46 +384,48 @@
                         map.addLayer(store.marker);
                     } else {
                         store.active = false;
-						map.removeLayer(store.marker);
-						}reframeActiveBoundaries();
-						});});
-					
-					masterToggle.addEventListener('click', function() {
-					allSelectedState = !allSelectedState;
-					this.textContent = allSelectedState ? "Deselect All" : "Select All";
-					switches.forEach(function(checkbox) {
-					checkbox.checked = allSelectedState;
-					});
-					
-					storeDirectory.forEach(function(store) {
-					store.active = allSelectedState;
-					if (allSelectedState) {
-					map.addLayer(store.marker);
-					} else {
-					map.removeLayer(store.marker);
-					}
-					});
-					reframeActiveBoundaries();
-					});
-					}
-					
-				// Dynamic automated map frame adjustments
-				function reframeActiveBoundaries() {
-				var renderingPins = [];
-				storeDirectory.forEach(function(store) {
-				if (store.active) renderingPins.push(store.marker);
-				});
-				
-				if (renderingPins.length > 0) {
-				var updateBounds = L.featureGroup(renderingPins);
-				map.fitBounds(updateBounds.getBounds().pad(0.3));
-				}}
-				
-        // Click the header to hide or show the bookstore list rows
-        document.querySelector('.panel-header').addEventListener('click', function() {
-            document.getElementById('listWrapper').classList.toggle('list-hidden');
-        });
+                        map.removeLayer(store.marker);
+                    }
+                    reframeActiveBoundaries();
+                });
+            });
 
+            masterToggle.addEventListener('click', function() {
+                allSelectedState = !allSelectedState;
+                this.textContent = allSelectedState ? "Deselect All" : "Select All";
+
+                switches.forEach(function(checkbox) {
+                    checkbox.checked = allSelectedState;
+                });
+
+                storeDirectory.forEach(function(store) {
+                    store.active = allSelectedState;
+                    if (allSelectedState) {
+                        map.addLayer(store.marker);
+                    } else {
+                        map.removeLayer(store.marker);
+                    }
+                });
+                reframeActiveBoundaries();
+            });
+
+            document.querySelector('.panel-header').addEventListener('click', function(e) {
+                if (e.target.id === 'masterToggle') return;
+                document.getElementById('listWrapper').classList.toggle('list-hidden');
+            });
+        }
+
+        function reframeActiveBoundaries() {
+            var renderingPins = [];
+            storeDirectory.forEach(function(store) {
+                if (store.active) renderingPins.push(store.marker);
+            });
+
+            if (renderingPins.length > 0) {
+                var updateBounds = L.featureGroup(renderingPins);
+                map.fitBounds(updateBounds.getBounds().pad(0.3));
+            }
+        }
     </script>
 </body>
 </html>
