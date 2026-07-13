@@ -18,4 +18,4 @@ Isto é um trabalho inacabado e em constante actualização. Contributos, alerta
 
 - Contudo, em 2026 por via da *deprecação da tecnologia* inicial e com recurso a plataformas AI, o mapa foi refeito e está agora mais simples e funcional, mas com informação igualmente aberta e acessivel.
 
-- Toda a informação contida na Base de Dados (ficheiro .csv) foi obtida ou adaptada do que foi econtrado por peqsuisa na internet.
+- Toda a informação contida na Base de Dados (ficheiro .csv) foi obtida ou adaptada do que foi econtrado por pesquisa na internet.
