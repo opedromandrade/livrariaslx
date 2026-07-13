@@ -14,7 +14,7 @@ No início de maio de 2020, querendo partilhar e compilar a informação de um m
 ## Sugestões
 O **Livrarias LX** é um trabalho inacabado e em constante actualização. Contributos, alertas e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade+livrariaslx@gmail.com).
 
-## Estrutura
+## 📊 Estrutura
 
 ```text
 livrariaslx/
