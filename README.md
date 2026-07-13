@@ -9,9 +9,22 @@ No início de maio de 2020, querendo partilhar e compilar a informação de um m
 ## Consulta de Informação
 - Mapa: https://opedromandrade.github.io/livrariaslx
 - A Base de Dados (ficheiro .csv) pode ser encontrada [aqui](https://www.google.com/maps/d/viewer?mid=1orbteiRiJ8dmNdUfOHfb4Mrqd3pAche4).<br>
+- A tabela daí resultante pode ser encontrada [aqui](https://github.com/opedromandrade/livrariaslx/blob/master/bookstores.md).<br>
 
 ## Sugestões
 Isto é um trabalho inacabado e em constante actualização. Contributos, alertas e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade+livrariaslx@gmail.com).
+
+# Estrutura
+
+```text
+livrariaslx/
+├── 📄 index.html
+├── 📊 bookstores.csv
+├── 📊 bookstores.md
+├── 🐍 csv2md.py
+├── 📜 leaflet.js
+└── 🎨 leaflet.css
+```
 
 ## Créditos
 - Inicialmente o **Livrarias LX** serviu-se do trabalho desenvolvido pelo projecto [DataVizForAll](https://github.com/DataVizForAll). A lista original de livrarias residia num ficheiro Google Sheets que pode ser encontrado [aqui](https://docs.google.com/spreadsheets/d/13YY8uzI5arZxlLez0GJwK55_BmGmFTXt3opiCGsCKm0/edit#gid=164271551)
