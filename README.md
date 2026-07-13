@@ -2,13 +2,13 @@
 **Livrarias LX** pretende fazer resenha das **Livrarias Independentes de Lisboa e Arredores**.
 <br>
 Todos aqueles locais de paixão pelo livro que fogem aos grandes impérios do consumo e aglomeração de massas, e onde existe um genuíno relacionamento entre livreiros e os apreciadores de livros.
-<br><br>
+<br>
 A resenha inciou-se em finais de 2019 com a marcação dos pins utilizando a plataforma google maps, que pode ser encontrado [aqui](https://www.google.com/maps/d/viewer?mid=1orbteiRiJ8dmNdUfOHfb4Mrqd3pAche4).<br>
 No início de maio de 2020, querendo partilhar e compilar a informação de um modo mais aberto e abrangente, transitou-se para o presente formato.
 
 ## Consulta de Informação
 - Mapa: https://opedromandrade.github.io/livrariaslx
-- 
+- A Base de Dados (ficheiro .csv) pode ser encontrada [aqui](https://www.google.com/maps/d/viewer?mid=1orbteiRiJ8dmNdUfOHfb4Mrqd3pAche4).<br>
 
 ## Sugestões
 Isto é um trabalho inacabado e em constante actualização. Contributos e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade+livrariaslx@gmail.com).
@@ -18,4 +18,4 @@ Isto é um trabalho inacabado e em constante actualização. Contributos e suges
 
 -Contudo, em 2026 com algum tempo livre e com recurso a plataformas AI, o mapa foi refeito e está agora mais simples e funcional, mas com informação igualmente aberta e acessivel.
 
-- Toda a informação contida na Base de Dados (ficheiro .csv) foi obtida ou adptada do que foi por peqsuisa na internet.
+- Toda a informação contida na Base de Dados (ficheiro .csv) foi obtida ou adaptada do que foi por peqsuisa na internet.
