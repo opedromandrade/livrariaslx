@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore Map Directory</title>
+    <title>Livrarias LX</title>
     
     <!-- Link directly to your separate local stylesheet file -->
     <link rel="stylesheet" href="leaflet.css" />
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
     
     <style>
         html, body, #map {
@@ -45,6 +46,7 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            z-index: 20;
         }
 
         .panel-title {
@@ -58,7 +60,28 @@
         .store-list-container {
             overflow-y: auto;
             flex-grow: 1;
-            padding: 8px 0;
+            padding: 0 0 8px 0;
+            position: relative;
+        }
+
+        /* Municipality Header Styling with Switch Support */
+        .municipality-header {
+            padding: 10px 16px;
+            background: rgba(235, 235, 240, 0.95);
+            backdrop-filter: blur(8px);
+            font-size: 11px;
+            font-weight: 700;
+            color: #48484a;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .store-item-row {
@@ -234,13 +257,14 @@
     <div class="map-overlay-panel">
         <div class="panel-header">
             <div>
-                <h2 class="panel-title">📚 Bookstores</h2>
+                <h2 class="panel-title">📚 Livrarias</h2>
                 <small style="font-size: 11px; color: #86868b; display: block; margin-top: 2px;">Click to hide / expand</small>
             </div>
             <button id="masterToggle" class="master-toggle-btn">Deselect All</button>
         </div>
         <div class="store-list-container" id="listWrapper"></div>
     </div>
+
     <!-- Link directly to your separate local script file -->
     <script src="leaflet.js"></script>
 
@@ -264,6 +288,26 @@
         var activeMarkerGroup = L.featureGroup();
         var allSelectedState = true;
 
+        // Smart parser to ensure commas inside quotes don't break columns
+        function splitCSVLine(line) {
+            var result = [];
+            var current = '';
+            var inQuotes = false;
+            for (var i = 0; i < line.length; i++) {
+                var char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim().replace(/^"|"$/g, ''));
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim().replace(/^"|"$/g, ''));
+            return result;
+        }
+
         fetch('bookstores.csv')
             .then(function(res) { return res.text(); })
             .then(function(csvText) {
@@ -274,6 +318,7 @@
                 var nameIdx = headers.indexOf('Name');
                 var latIdx = headers.indexOf('Latitude');
                 var lngIdx = headers.indexOf('Longitude');
+                var munIdx = headers.indexOf('Municipality');
                 var addrIdx = headers.indexOf('Address');
                 var phoneIdx = headers.indexOf('Phone');
                 var webIdx = headers.indexOf('Website');
@@ -283,15 +328,17 @@
                 var listWrapper = document.getElementById('listWrapper');
                 var dynamicHTML = '';
                 var idCounter = 0;
+                var groupedStores = {};
 
                 for (var i = 1; i < lines.length; i++) {
                     var currentLine = lines[i].trim();
                     if (!currentLine) continue;
 
-                    var columns = currentLine.split(',');
+                    var columns = splitCSVLine(currentLine);
                     var latVal = parseFloat(columns[latIdx]);
                     var lngVal = parseFloat(columns[lngIdx]);
                     var nameVal = (columns[nameIdx] || "Bookstore").trim();
+                    var munVal = (columns[munIdx] || "Other").trim();
                     var addrVal = (columns[addrIdx] || "Coordinates mapped").trim();
                     var phoneVal = columns[phoneIdx] ? columns[phoneIdx].trim() : "";
                     var webVal = columns[webIdx] ? columns[webIdx].trim() : "";
@@ -315,43 +362,69 @@
                         }
                         marker.bindPopup(popupContent);
 
-                        storeDirectory.push({
+                        var storeObj = {
                             id: idCounter,
                             name: nameVal,
                             address: addrVal,
+                            phone: phoneVal,
+                            web: webVal,
+                            fb: fbVal,
+                            ig: igVal,
+                            municipality: munVal,
                             marker: marker,
                             active: true
-                        });
+                        };
 
+                        storeDirectory.push(storeObj);
                         marker.addTo(activeMarkerGroup);
 
+                        if (!groupedStores[munVal]) {
+                            groupedStores[munVal] = [];
+                        }
+                        groupedStores[munVal].push(storeObj);
+
+                        idCounter++;
+                    }
+                }
+
+                var sortedMunicipalities = Object.keys(groupedStores).sort();
+                
+                sortedMunicipalities.forEach(function(municipality) {
+                    // Render Municipality item with built-in master switch filter
+                    dynamicHTML += '<div class="municipality-header">' +
+                        '<span>📍 ' + municipality + '</span>' +
+                        '<label class="toggle-switch-wrapper">' +
+                            '<input type="checkbox" class="municipality-toggle-switch" data-municipality="' + municipality + '" checked />' +
+                            '<span class="slider-button"></span>' +
+                        '</label>' +
+                    '</div>';
+                    
+                    groupedStores[municipality].forEach(function(store) {
                         dynamicHTML += '<div class="store-item-row">' +
-                            '<div class="store-meta-text" onclick="focusStoreMarker(' + idCounter + ')">' +
-                                '<p class="store-display-name">' + nameVal + '</p>' +
-                                '<p class="store-display-address">' + addrVal + '</p>';
+                            '<div class="store-meta-text" onclick="focusStoreMarker(' + store.id + ')">' +
+                                '<p class="store-display-name">' + store.name + '</p>' +
+                                '<p class="store-display-address">' + store.address + '</p>';
                         
-                        if (phoneVal) {
-                            dynamicHTML += '<a class="store-display-contact" href="tel:' + phoneVal.replace(/\s+/g, '') + '">📞 ' + phoneVal + '</a>';
+                        if (store.phone) {
+                            dynamicHTML += '<a class="store-display-contact" href="tel:' + store.phone.replace(/\s+/g, '') + '">📞 ' + store.phone + '</a>';
                         }
                         
-                        if (webVal || fbVal || igVal) {
+                        if (store.web || store.fb || store.ig) {
                             dynamicHTML += '<div class="panel-links-row">';
-                            if (webVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + webVal + '">🌐 Web</a>';
-                            if (fbVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + fbVal + '">📘 FB</a>';
-                            if (igVal) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + igVal + '">📸 IG</a>';
+                            if (store.web) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + store.web + '">🌐 Web</a>';
+                            if (store.fb) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + store.fb + '">📘 FB</a>';
+                            if (store.ig) dynamicHTML += '<a class="panel-inline-link" target="_blank" href="' + store.ig + '">📸 IG</a>';
                             dynamicHTML += '</div>';
                         }
 
                         dynamicHTML += '</div>' +
                             '<label class="toggle-switch-wrapper">' +
-                                '<input type="checkbox" class="toggle-input-switch" data-id="' + idCounter + '" checked />' +
+                                '<input type="checkbox" class="toggle-input-switch" data-id="' + store.id + '" data-municipality="' + store.municipality + '" checked />' +
                                 '<span class="slider-button"></span>' +
                             '</label>' +
                         '</div>';
-
-                        idCounter++;
-                    }
-                }
+                    });
+                });
 
                 listWrapper.innerHTML = dynamicHTML;
 
@@ -372,11 +445,14 @@
 
         function attachInteractiveListeners() {
             var switches = document.querySelectorAll('.toggle-input-switch');
+            var munSwitches = document.querySelectorAll('.municipality-toggle-switch');
             var masterToggle = document.getElementById('masterToggle');
 
+            // 1. Individual Bookstore Switches
             switches.forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
                     var targetedId = parseInt(this.getAttribute('data-id'));
+                    var munName = this.getAttribute('data-municipality');
                     var store = storeDirectory.find(function(item) { return item.id === targetedId; });
                     
                     if (this.checked) {
@@ -386,17 +462,53 @@
                         store.active = false;
                         map.removeLayer(store.marker);
                     }
+
+                    // Auto sync parent Municipality Header check status
+                    var munCheckbox = document.querySelector('.municipality-toggle-switch[data-municipality="' + munName + '"]');
+                    if (munCheckbox) {
+                        var allMunStores = storeDirectory.filter(function(s) { return s.municipality === munName; });
+                        var allMunActive = allMunStores.every(function(s) { return s.active; });
+                        munCheckbox.checked = allMunActive;
+                    }
+
                     reframeActiveBoundaries();
                 });
             });
 
+            // 2. Municipality Group Master Switches
+            munSwitches.forEach(function(munCheckbox) {
+                munCheckbox.addEventListener('change', function() {
+                    var munName = this.getAttribute('data-municipality');
+                    var isChecked = this.checked;
+
+                    // Sync child UI switches
+                    var childSwitches = document.querySelectorAll('.toggle-input-switch[data-municipality="' + munName + '"]');
+                    childSwitches.forEach(function(cb) {
+                        cb.checked = isChecked;
+                    });
+
+                    // Sync core directory logic and layers
+                    storeDirectory.forEach(function(store) {
+                        if (store.municipality === munName) {
+                            store.active = isChecked;
+                            if (isChecked) {
+                                map.addLayer(store.marker);
+                            } else {
+                                map.removeLayer(store.marker);
+                            }
+                        }
+                    });
+                    reframeActiveBoundaries();
+                });
+            });
+
+            // 3. Top Master Toggle All Control
             masterToggle.addEventListener('click', function() {
                 allSelectedState = !allSelectedState;
                 this.textContent = allSelectedState ? "Deselect All" : "Select All";
 
-                switches.forEach(function(checkbox) {
-                    checkbox.checked = allSelectedState;
-                });
+                switches.forEach(function(checkbox) { checkbox.checked = allSelectedState; });
+                munSwitches.forEach(function(checkbox) { checkbox.checked = allSelectedState; });
 
                 storeDirectory.forEach(function(store) {
                     store.active = allSelectedState;
@@ -409,8 +521,9 @@
                 reframeActiveBoundaries();
             });
 
+            // 4. Panel Minimize Event
             document.querySelector('.panel-header').addEventListener('click', function(e) {
-                if (e.target.id === 'masterToggle') return;
+                if (e.target.id === 'masterToggle' || e.target.closest('.master-toggle-btn')) return;
                 document.getElementById('listWrapper').classList.toggle('list-hidden');
             });
         }
