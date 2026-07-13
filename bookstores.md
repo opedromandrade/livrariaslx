@@ -18,8 +18,8 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 
 | Name | Latitude | Longitude | Municipality | Address | Phone | Website | Facebook | Instagram |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| Meia Volta de Urano - Casa das Artes | 38.6865874 | -9.1486885 | Almada | "Rua Cândido dos Reis 49<br>2800-269 Almada" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Escriba | 38.6701114 | -9.1590515 | Almada | "Rua Cooperativa Piedense 100<br>2805-256 Almada" | — | — | https://www.facebook.com | https://www.instagram.com |
+| Meia Volta de Urano - Casa das Artes | 38.6865874 | -9.1486885 | Almada | "Rua Cândido dos Reis 49<br>2800-269 Almada" | — | — | https://www.facebook.com | https://www.instagram.com |
 
 ---
 
@@ -40,9 +40,9 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 | It's a Book | 38.7250884 | -9.133254 | Lisboa | "Rua do Forno do Tijolo 30 A<br>1170-137 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Kingpin Books | 38.7287721 | -9.1345074 | Lisboa | "Av. Alm. Reis 82 A<br>1150-021 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Ler Devagar | 38.7035223 | -9.1788427 | Lisboa | "Rua Rodrigues de Faria 103 - G 0.3<br>1300-501 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
+| Livraria do Simão | 38.7127553 | -9.136075 | Lisboa | "Escadinhas de São Cristóvão 18<br>1100-204 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Ler | 38.717588 | -9.1646802 | Lisboa | "Rua Almeida e Sousa 24<br>1350-271 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Sá da Costa | 38.7107332 | -9.1417748 | Lisboa | "Rua Garrett 100<br>1200-273 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
-| Livraria do Simão | 38.7127553 | -9.136075 | Lisboa | "Escadinhas de São Cristóvão 18<br>1100-204 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Solidária de Carnide | 38.7576119 | -9.1862852 | Lisboa | "Rua Adelaide Cabete<br>1600-187 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Trindade | 38.7089912 | -9.1431438 | Lisboa | "Rua do Alecrim 36<br>1200-018 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Nouvelle Librairie Française | 38.7339882 | -9.1493984 | Lisboa | "Rua Pinheiro Chagas 50B<br>1050-179 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
@@ -74,10 +74,10 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 | Municipality | Number of Stores | Percentage |
 |--------------|------------------|------------|
 | Lisboa | 14 | 70% |
-| Almada | 2 | 10% |
 | Oeiras | 2 | 10% |
-| Cascais | 1 | 5% |
+| Almada | 2 | 10% |
 | Sintra | 1 | 5% |
+| Cascais | 1 | 5% |
 
 ---
 
