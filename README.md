@@ -8,7 +8,7 @@ No início de maio de 2020, querendo partilhar e compilar a informação de um m
 
 ## Consulta de Informação
 - Mapa: https://opedromandrade.github.io/livrariaslx
-- A Base de Dados (ficheiro .csv) pode ser encontrada [aqui](https://www.google.com/maps/d/viewer?mid=1orbteiRiJ8dmNdUfOHfb4Mrqd3pAche4).<br>
+- A Base de Dados (ficheiro .csv) pode ser encontrada [aqui](https://github.com/opedromandrade/livrariaslx/blob/master/bookstores.csv).<br>
 - A tabela daí resultante pode ser encontrada [aqui](https://github.com/opedromandrade/livrariaslx/blob/master/bookstores.md).<br>
 
 ## Sugestões
