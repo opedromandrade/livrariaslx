@@ -12,9 +12,9 @@ No início de maio de 2020, querendo partilhar e compilar a informação de um m
 - A tabela daí resultante pode ser encontrada [aqui](https://github.com/opedromandrade/livrariaslx/blob/master/bookstores.md).<br>
 
 ## Sugestões
-Isto é um trabalho inacabado e em constante actualização. Contributos, alertas e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade+livrariaslx@gmail.com).
+O **Livrarias LX** é um trabalho inacabado e em constante actualização. Contributos, alertas e sugestões são bem-vindos e podem ser remetidos através de [email](mailto:pmm.andrade+livrariaslx@gmail.com).
 
-# Estrutura
+## Estrutura
 
 ```text
 livrariaslx/
