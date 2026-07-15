@@ -6,7 +6,7 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 
 | Metric | Value |
 |--------|-------|
-| Total Bookstores | 20 |
+| Total Bookstores | 21 |
 | Municipalities | 5 (Almada, Cascais, Lisboa, Oeiras, Sintra) |
 | Data Last Updated | July 2026 |
 
@@ -31,17 +31,18 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 
 ---
 
-### Lisboa (14 stores)
+### Lisboa (15 stores)
 
 | Name | Latitude | Longitude | Municipality | Address | Phone | Website | Facebook | Instagram |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| Baobá | 38.7159425 | -9.165286 | Lisboa | "Rua Tomás da Anunciação 26<br>1350-142 Lisboa" | 212 123 123 | https://baobalivraria.pt/ | — | https://www.instagram.com/baobalivraria/ |
-| Bookshop Bivar | 38.732725 | -9.1388766 | Lisboa | "Rua de Ponta Delgada 34A<br>1000-243 Lisboa" | — | — | https://www.facebook.com/BookshopBivar | https://www.instagram.com/bookshopbivar |
+| Baobá | 38.7159425 | -9.165286 | Lisboa | "Rua Tomás da Anunciação 26<br>1350-142 Lisboa" | 211 928 317 | https://baobalivraria.pt/ | https://www.facebook.com/baobalivraria | https://www.instagram.com/baobalivraria/ |
+| Bookshop Bivar | 38.732725 | -9.1388766 | Lisboa | "Rua de Ponta Delgada 34A<br>1000-243 Lisboa" | — | — | https://www.facebook.com/BookshopBivar | https://www.instagram.com |
 | It's a Book | 38.7250884 | -9.133254 | Lisboa | "Rua do Forno do Tijolo 30 A<br>1170-137 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Kingpin Books | 38.7287721 | -9.1345074 | Lisboa | "Av. Alm. Reis 82 A<br>1150-021 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Ler Devagar | 38.7035223 | -9.1788427 | Lisboa | "Rua Rodrigues de Faria 103 - G 0.3<br>1300-501 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria do Simão | 38.7127553 | -9.136075 | Lisboa | "Escadinhas de São Cristóvão 18<br>1100-204 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Ler | 38.717588 | -9.1646802 | Lisboa | "Rua Almeida e Sousa 24<br>1350-271 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
+| Livraria Lumaca | 38.74599582 | -9.182175898 | Lisboa | "Estrada de Benfica 366A<br>1500-100 Lisboa" | 912 876 892 | — | — | https://www.instagram.com/lumaca.books |
 | Livraria Sá da Costa | 38.7107332 | -9.1417748 | Lisboa | "Rua Garrett 100<br>1200-273 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Solidária de Carnide | 38.7576119 | -9.1862852 | Lisboa | "Rua Adelaide Cabete<br>1600-187 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
 | Livraria Trindade | 38.7089912 | -9.1431438 | Lisboa | "Rua do Alecrim 36<br>1200-018 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
@@ -73,19 +74,19 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 
 | Municipality | Number of Stores | Percentage |
 |--------------|------------------|------------|
-| Lisboa | 14 | 70% |
-| Oeiras | 2 | 10% |
+| Lisboa | 15 | 71% |
 | Almada | 2 | 10% |
-| Sintra | 1 | 5% |
+| Oeiras | 2 | 10% |
 | Cascais | 1 | 5% |
+| Sintra | 1 | 5% |
 
 ---
 
 ## 🔗 Quick Links
 
 - **[🌐 Website]** [Baobá](https://baobalivraria.pt/)
-- **📞 Phone Listed:** Baobá (212 123 123)
+- **📞 Phone Listed:** Baobá (211 928 317), Livraria Lumaca (912 876 892)
 
 ---
 
-*Generated from `bookstores.csv` on 2026-07-13 — All data as recorded in source file.*
+*Generated from `bookstores.csv` on 2026-07-15 — All data as recorded in source file.*
