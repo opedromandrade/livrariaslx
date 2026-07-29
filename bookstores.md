@@ -44,10 +44,10 @@ A curated collection of independent bookstores in the Lisbon metropolitan area.
 | Livraria do Simão | 38.7127553 | -9.136075 | Lisboa | "Escadinhas de São Cristóvão 18<br>1100-204 Lisboa" | — | — | — | — |
 | Livraria Ler | 38.717588 | -9.1646802 | Lisboa | "Rua Almeida e Sousa 24<br>1350-271 Lisboa" | — | — | — | — |
 | Livraria Lumaca | 38.74599582 | -9.182175898 | Lisboa | "Estrada de Benfica 366A<br>1500-100 Lisboa" | 912 876 892 | — | https://www.facebook.com/p/Livraria-Lumaca-61580792816091/ | https://www.instagram.com/lumaca.books |
-| Livraria Sá da Costa | 38.7107332 | -9.1417748 | Lisboa | "Rua Garrett 100<br>1200-273 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
-| Livraria Solidária de Carnide | 38.7576119 | -9.1862852 | Lisboa | "Rua Adelaide Cabete<br>1600-187 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
-| Livraria Trindade | 38.7089912 | -9.1431438 | Lisboa | "Rua do Alecrim 36<br>1200-018 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
-| Nouvelle Librairie Française | 38.7339882 | -9.1493984 | Lisboa | "Rua Pinheiro Chagas 50B<br>1050-179 Lisboa" | — | — | https://www.facebook.com | https://www.instagram.com |
+| Livraria Sá da Costa | 38.7107332 | -9.1417748 | Lisboa | "Rua Garrett 100<br>1200-273 Lisboa" | — | — | — | — |
+| Livraria Solidária de Carnide | 38.7576119 | -9.1862852 | Lisboa | "Rua Adelaide Cabete<br>1600-187 Lisboa" | — | — | — | — |
+| Livraria Trindade | 38.7089912 | -9.1431438 | Lisboa | "Rua do Alecrim 36<br>1200-018 Lisboa" | — | — | — | — |
+| Nouvelle Librairie Française | 38.7339882 | -9.1493984 | Lisboa | "Rua Pinheiro Chagas 50B<br>1050-179 Lisboa" | — | — | — | — |
 | Tigre de Papel | 38.7306859 | -9.1363297 | Lisboa | "Rua de Arroios nº25<br>1150-053 Lisboa" | — | https://tigrepapel.pt/ | https://www.facebook.com/tigrepapel.pt/ | https://www.instagram.com/Tigredepapel_livraria |
 | Tinta nos Nervos | 38.708522 | -9.1538839 | Lisboa | "Rua da Esperança 39<br>1200-655 Lisboa" | — | — | — | — |
 | XYZ Books | 38.7275595 | -9.1317117 | Lisboa | "Rua Ilha do Príncipe 3A porta E<br>1170-182 Lisboa" | — | — | — | — |
